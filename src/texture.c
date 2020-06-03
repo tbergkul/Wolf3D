@@ -6,7 +6,7 @@
 /*   By: tbergkul <tbergkul@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 13:22:41 by tbergkul          #+#    #+#             */
-/*   Updated: 2020/02/14 16:07:31 by tbergkul         ###   ########.fr       */
+/*   Updated: 2020/02/17 13:53:03 by tbergkul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,13 @@ void	texture(t_w *w)
 }
 
 /*
-**	Wall_texture will draw the wall with the texture.
+**	Wall_texture will draw the wall with the texture. The n variable
+**	is calculated to know what kind of wall it is and what kind of
+**	texture to use. The wall variable is the exact location where the
+**	wall was hit. This is required so that we can calculate which
+**	x-coordinate to use in the texture. Textx will be calculated
+**	for that. Textx will be constant during this loop, but texty will
+**	be the texture y-coordinate that we will recalculate every loop.
 */
 
 void	wall_texture(t_w *w, int temp_start)

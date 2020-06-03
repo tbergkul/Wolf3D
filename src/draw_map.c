@@ -6,46 +6,53 @@
 /*   By: tbergkul <tbergkul@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 12:52:41 by tbergkul          #+#    #+#             */
-/*   Updated: 2020/02/14 16:12:52 by tbergkul         ###   ########.fr       */
+/*   Updated: 2020/02/17 12:14:53 by tbergkul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
 
 /*
-**
+**	Line_draw_init will set 6 variables: nextx(nexty) is the distance that
+**	lookdirx has to travel from one x-side to the next x-side.
+**	Stepx(stepy) is determined by the direction the lookdirx is going. The
+**	variable is either -1 or 1. If the lookdirx is positive, so is stepx.
+**	Sidedisx(sidedisy) is the distance lookdirx has to travel from the
+**	starting position to reach the next x-side.
 */
 
 void	line_draw_init(t_w *w)
 {
-	w->deldistx = sqrt(1 + (w->lookdiry * w->lookdiry) /
+	w->nextx = sqrt(1 + (w->lookdiry * w->lookdiry) /
 		(w->lookdirx * w->lookdirx));
-	w->deldisty = sqrt(1 + (w->lookdirx * w->lookdirx) /
+	w->nexty = sqrt(1 + (w->lookdirx * w->lookdirx) /
 		(w->lookdiry * w->lookdiry));
 	if (w->lookdirx < 0)
 	{
 		w->stepx = -1;
-		w->sidedisx = (w->lookposx - w->mapx) * w->deldistx;
+		w->sidedisx = (w->lookposx - w->mapx) * w->nextx;
 	}
 	else
 	{
 		w->stepx = 1;
-		w->sidedisx = (w->mapx + 1.0 - w->lookposx) * w->deldistx;
+		w->sidedisx = (w->mapx + 1.0 - w->lookposx) * w->nextx;
 	}
 	if (w->lookdiry < 0)
 	{
 		w->stepy = -1;
-		w->sidedisy = (w->lookposy - w->mapy) * w->deldisty;
+		w->sidedisy = (w->lookposy - w->mapy) * w->nexty;
 	}
 	else
 	{
 		w->stepy = 1;
-		w->sidedisy = (w->mapy + 1.0 - w->lookposy) * w->deldisty;
+		w->sidedisy = (w->mapy + 1.0 - w->lookposy) * w->nexty;
 	}
 }
 
 /*
-**
+**	Line_draw will calculate where the wall is and store the coordinates
+**	in the mapx and mapy variables. On the same time it will know if the
+**	wall hit is a sidewall or not.
 */
 
 void	line_draw(t_w *w)
@@ -55,13 +62,13 @@ void	line_draw(t_w *w)
 	{
 		if (w->sidedisx < w->sidedisy)
 		{
-			w->sidedisx += w->deldistx;
+			w->sidedisx += w->nextx;
 			w->mapx += w->stepx;
 			w->side = 0;
 		}
 		else
 		{
-			w->sidedisy += w->deldisty;
+			w->sidedisy += w->nexty;
 			w->mapy += w->stepy;
 			w->side = 1;
 		}
@@ -71,7 +78,7 @@ void	line_draw(t_w *w)
 }
 
 /*
-**
+**	Draw_init will calculate the distance to the wall.
 */
 
 void	draw_init(t_w *w)

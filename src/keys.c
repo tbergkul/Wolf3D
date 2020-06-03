@@ -6,14 +6,14 @@
 /*   By: tbergkul <tbergkul@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 16:27:29 by tbergkul          #+#    #+#             */
-/*   Updated: 2020/02/14 14:28:33 by tbergkul         ###   ########.fr       */
+/*   Updated: 2020/02/17 12:17:47 by tbergkul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
 
 /*
-**	Closewin will exit the program when the red X is played on the window.
+**	Closewin will exit the program when the red X is pressed in the window.
 */
 
 int		closewin(void)
@@ -25,7 +25,7 @@ int		closewin(void)
 /*
 **	Key_release checks if a key is released. If a key is released then
 **	the corresponding variable will be set to 0. If SHIFT is released then
-**	movementspeed will be decreased.
+**	movementspeed will be decreased and rotationspeed increased.
 */
 
 int		key_release(int key, t_w *w)
@@ -49,7 +49,8 @@ int		key_release(int key, t_w *w)
 /*
 **	Key_press checks if a key is pressed down. If a key is pressed down then
 **	the corresponding variable will be set to 1. If SHIFT is pressed then
-**	movementspeed will be increased. Remove/apply textures by pressing T.
+**	movementspeed will be increased and rotationspeed decreased.
+**	Remove/apply textures by pressing T.
 */
 
 int		key_press(int key, t_w *w)
@@ -75,8 +76,8 @@ int		key_press(int key, t_w *w)
 }
 
 /*
-**	Rotating acts only if a key is pressed down. If A/LEFT is pressed down then
-**	the player will rotate left etc.
+**	Rotating acts only if a A or D are being pressed down. If A/LEFT is
+**	pressed down then the player will rotate left etc.
 */
 
 void	rotating(t_w *w)
@@ -109,8 +110,8 @@ void	rotating(t_w *w)
 }
 
 /*
-**	Moving acts only if a key is pressed down. If W/UP is pressed down then
-**	the player will move forward etc.
+**	Moving acts only if a W or S are being pressed down. If W/UP is pressed
+**	down then the player will move forward etc.
 */
 
 int		moving(t_w *w)

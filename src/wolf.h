@@ -6,7 +6,7 @@
 /*   By: tbergkul <tbergkul@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 16:45:21 by tbergkul          #+#    #+#             */
-/*   Updated: 2020/02/14 15:23:43 by tbergkul         ###   ########.fr       */
+/*   Updated: 2020/02/17 12:41:54 by tbergkul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,8 +118,8 @@ typedef struct	s_w
 	double		sidedisy;
 	double		mspeed;
 	double		rspeed;
-	double		deldistx;
-	double		deldisty;
+	double		nextx;
+	double		nexty;
 	int			forward;
 	int			back;
 	int			right;
